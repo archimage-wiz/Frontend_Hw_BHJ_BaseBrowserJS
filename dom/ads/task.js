@@ -22,4 +22,3 @@ function rotateElementClass(elements, classItem) {
     elements[(currentIndex + 1) % elements.length].classList.add(classItem);
 }
 
-alert(5 % 4);
