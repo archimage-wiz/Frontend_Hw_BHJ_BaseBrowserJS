@@ -22,17 +22,13 @@ for (let productElement of productsList) {
         quantityValue.textContent = +quantityValue.textContent + 1;
     });
     productAdd.addEventListener("click", () => {
-        let inCartId = -1;
-        let prodSave = null;
-        for (let prod of cartOfProducts.children) {
-            if (productElement.dataset.id === prod.dataset.id) {
-                inCartId = prod.dataset.id;
-                prodSave = prod;
-                break;
-            }
-        }
-        if (inCartId > 0) {
-            const productCount = prodSave.querySelector(".cart__product-count");
+        const foundProduct = [...cartOfProducts.children].find(
+            (prod) => productElement.dataset.id === prod.dataset.id
+        );
+        if (foundProduct) {
+            const productCount = foundProduct.querySelector(
+                ".cart__product-count"
+            );
             productCount.textContent =
                 +productCount.textContent + +quantityValue.textContent;
         } else {

@@ -3,19 +3,17 @@ const tasksList = document.querySelector("#tasks__list");
 
 submitForm.addEventListener("submit", (event) => {
     event.preventDefault();
-
-    const taskText = submitForm["task__input"].value;
-    const newTaskElem = createTaskElement(taskText);
-
-    for (let child of newTaskElem.children) {
-        if (child.classList.contains("task__remove")) {
-            child.addEventListener("click", (e) => {
+    const taskText = submitForm["task__input"].value.trim();
+    if (taskText) {
+        const newTaskElem = createTaskElement(taskText);
+        newTaskElem
+            .querySelector(".task__remove")
+            .addEventListener("click", (e) => {
                 e.target.parentElement.remove();
             });
-        }
+        tasksList.append(newTaskElem);
     }
-
-    tasksList.append(newTaskElem);
+    event.target.reset();
 });
 
 function createTaskElement(text) {
